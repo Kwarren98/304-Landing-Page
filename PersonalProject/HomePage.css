@@ -4,18 +4,18 @@
 
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-    padding: 10px;
+    padding: 5px;
     background-color: #e1d5d2;
+}
+
+div {
+    background-color: #4b4a5a;
 }
 
 header {
     font-size: 50px;
     text-align: center;
     background:#a55540;
-}
-
-.first-color { 
-	background: #4b4a5a; 
 }
 
 .third-color { 

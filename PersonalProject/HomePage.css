@@ -5,14 +5,20 @@
 body {
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     padding: 5px;
-    background-color: #e1d5d2;
+    background: #e1d5d2;
 }
 
 div {
-    background-color: #4b4a5a;
+    background: #4b4a5a;
 }
 
 header {
+    font-size: 50px;
+    text-align: center;
+    background:#a55540;
+}
+
+footer {
     font-size: 50px;
     text-align: center;
     background:#a55540;

@@ -36,8 +36,4 @@ table, th, td {
     text-decoration: underline;
 }
 
-#loreAndStory {
-    display:flex;
-    flex-direction: column;
-    align-items: center;
-}
+

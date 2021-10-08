@@ -24,8 +24,8 @@ footer {
     background:#a55540;
 }
 
-.loreTable {
-    border: 2px solid #a55540;
+table, th, td {
+    border: 2px solid black;
 }
 
 #tableTitles {

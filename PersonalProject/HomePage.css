@@ -31,3 +31,8 @@ table, th, td {
 #tableTitles {
     text-decoration: underline;
 }
+
+#loreAndStory {
+    display:flex;
+    align-items: center;
+}

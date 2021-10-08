@@ -10,6 +10,7 @@ body {
 
 div {
     background-color: #4b4a5a;
+    color: #e79a58;
 }
 
 header {
@@ -24,6 +25,4 @@ footer {
     background:#a55540;
 }
 
-.third-color { 
-	background: #e79a58; 
-}
+

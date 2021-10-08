@@ -25,5 +25,9 @@ footer {
 }
 
 .loreTable {
-    
+    border: 2px solid #a55540;
+}
+
+#tableTitles {
+    text-decoration: underline;
 }

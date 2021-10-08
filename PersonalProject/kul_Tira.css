@@ -1,0 +1,44 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    padding: 5px;
+    background: #4b4a5a;
+    display: flex;
+    flex-direction: column;
+    align-content: space-between;
+}
+
+div {
+    color: #e79a58;
+}
+
+header {
+    font-size: 30px;
+    text-align: center;
+    background:#a55540;
+    display:flex;
+
+}
+
+h2, h3 {
+    text-align: center;
+}
+
+footer {
+    font-size: 20px;
+    text-align: center;
+    background:#a55540;
+}
+
+table, th, td {
+    border: 2px solid black;
+}
+
+#tableTitles {
+    text-decoration: underline;
+}
+
+

@@ -1,0 +1,84 @@
+/*
+kwarren17@georgefox.edu
+CSS Zen Garden
+Due 2021-10-21
+*/
+
+/*
+todo:
+- Pong skeleton
+- ping skeleton
+- ball skeleton
+- animation pong
+- animation ping
+- animation ball
+
+-prioritize simple ball back and forth, add complexity if time available.
+*/
+
+
+.page-wrapper {
+    border: solid white;
+    border-width: 50px 170px;
+    position:absolute;
+    top: 0px;
+    right: 0px;
+    bottom:0px;
+    left:0px;
+    background-color: black;
+    color: rgb(51,255,0);
+    font-family: 'Courier New', Courier, monospace;
+    font-size: .7vw;
+}
+
+header, footer {
+    font-size:20px;
+}
+
+a {
+    color: rgb(0, 255, 255);
+}
+
+.summary {
+    position: relative;
+    text-align: center;
+}
+
+header {
+    color:black;
+    position:absolute;
+    top:-60px;
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content:space-between;
+    width:100%;
+}
+
+footer {    
+    position:absolute;
+    bottom: -40px;
+    display:flex;
+    flex-flow: row nowrap;
+    justify-content:space-between;
+    font-size:20px;
+    width:100%;
+}
+
+footer > a {
+    color:black;
+}
+
+/* From Example CSS */
+.sidebar { 
+	position: absolute; 
+	top: 0; 
+	right: -175px;
+    width: 190px;
+    margin: 0px 2px 0px 0px;
+    color:black;
+}
+
+div h3 {
+    text-align: center;
+}
+

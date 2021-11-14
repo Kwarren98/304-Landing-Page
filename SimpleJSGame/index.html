@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Simple JS Game</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="gameStyle.css">
+    </head>
+    <body>
+        <canvas id="gamePage" width="960" height ="640"></canvas>
+
+        <div id="explination">
+            <p>The idea is to click somewhere and it will act as a grappling hook, with the object swinging around the page. The reality is far more...wiggly.</p>
+            <p>This is less of a game and more of a proof of concept. I wanted to see if I could make a rudementary physics sim for kinematic motion. The results are... interesting so far. Have fun with the complete nonsense I've somehow created. I may expand on this project for the final, its been interesting so far. </p><br>
+        </div>
+
+        <div id="coordinates">
+            <p>Bunch of stuff for testing and logging. Shouldn't exist after I'm done. Probably will anyway because I'll forget to comment it out.</p>
+            
+            <table>
+                <tr>
+                    <td>
+                        <p>X:</p>
+                    </td>
+                    <td>
+                        <p id="x-coordinate">0</p>
+                    </td>
+                    <td>
+                        <p>Mouse X:</p>
+                    </td>
+                    <td>
+                        <p id="mouse-x-coordinate">0</p>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <p>Y:</p>
+                    </td>
+                    <td>
+                        <p id="y-coordinate">0</p>
+                    </td>
+                    <td>
+                        <p>mouse Y:</p>
+                    </td>
+                    <td>
+                        <p id="mouse-y-coordinate">0</p>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <script src="logic.js" async defer></script>
+    </body>
+</html>

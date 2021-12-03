@@ -35,12 +35,12 @@ let playerDY = 0;       // m/s
 let tStep = 1/60;       // s
 
 // arbitrary variables to fiddle with to try and improve control 'feel'
-let inputForce = 0;     // N
-let inputAngle = 0; 
-let grappleForce = 0;   // N
+// let inputForce = 0;     // N
+// let inputAngle = 0; 
+let grappleForce = 0;       // N
 let grappleAngle = 0;
-let playerMass = 10;    // kg
-let gravAccel = 0;      // m/s^2
+let playerMass = 10;        // kg
+let gravAccel = 9000;       // m/s^2
 
 // calculate player boundries
 let playerLeft = playerX-charSize/2;

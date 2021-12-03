@@ -152,7 +152,7 @@ canvas.addEventListener("click", function(e) {
     grappleFlag = true;
     grapplePointX = e.clientX - gameRect.left;
     grapplePointY = e.clientY - gameRect.top;
-    grappleForce = 200;
+    grappleForce = 2000;
 });
 
 document.addEventListener("keydown", keyDownHandler, false);
@@ -179,15 +179,15 @@ function keyUpHandler(e) {
 //-------------------------
 // Mathy things
 //-------------------------
-function updateXVelocity (grappleAngle, inputAngle) {
-    //console.log("x" + ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX)
-    return ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX;
-}
+// function updateXVelocity (grappleAngle, inputAngle) {
+//     //console.log("x" + ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX)
+//     return ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX;
+// }
 
-function updateYVelocity (grappleAngle, inputAngle) {
-    //console.log("y" + ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX)
-    return ((-grappleForce*Math.sin(grappleAngle) + playerMass*gravAccel)/playerMass)*tStep + playerDY;
-}
+// function updateYVelocity (grappleAngle, inputAngle) {
+//     //console.log("y" + ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX)
+//     return ((-grappleForce*Math.sin(grappleAngle) + playerMass*gravAccel)/playerMass)*tStep + playerDY;
+// }
 
 // outputs radians
 function calculateGrappleAngle() {  
@@ -207,8 +207,8 @@ function calculationManager() {
     let gravForce = playerMass * gravAccel;
     let delV = (tStep/playerMass) * Math.pow((Math.pow(grappleForce, 2) + gravForce * (gravForce - grappleForce * Math.sin(grappleAngle))), .5);
 
-    playerDX = delV * Math.sin(grappleAngle);
-    playerDY = delV * Math.cos(grappleAngle);
+    playerDX = delV * Math.cos(grappleAngle);
+    playerDY = delV * Math.sin(grappleAngle);
 
     checkCollision();
 
@@ -250,10 +250,12 @@ setInterval(updateDeveloperDisplay, 20);
 
 // Used for testing purposes, shouldn't exist in code after I'm done. 
 function updateDeveloperDisplay() {
-    document.getElementById("x-coordinate").innerHTML = playerX;
-    document.getElementById("y-coordinate").innerHTML = playerY;
+    document.getElementById("x-coordinate").innerHTML = Math.round(playerX * 100) / 100;
+    document.getElementById("y-coordinate").innerHTML = Math.round(playerY * 100) / 100;
     document.getElementById("grapple-x-coordinate").innerHTML = grapplePointX;
     document.getElementById("grapple-y-coordinate").innerHTML = grapplePointY;
+    document.getElementById("del-x").innerHTML = Math.round((grapplePointX - playerX) * 100) / 100;
+    document.getElementById("del-y").innerHTML = Math.round((grapplePointY - playerY) * 100) / 100;
 }
 
 

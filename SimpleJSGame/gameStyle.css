@@ -18,6 +18,8 @@ canvas {
 }
 
 table {
+    border: 1px solid black;
+    table-layout: fixed;
     width:100%;
 }
 

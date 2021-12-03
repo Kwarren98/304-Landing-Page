@@ -4,5 +4,5 @@
 
 1. <a href = "./PersonalProject/home.html">Assignment 1: Personal Project</a>
 2. <a href = "./zenGarden/index.html">Assignment2:Zen Garden</a>
-3. <a href = "./SimpleJSGame/index.html">Behold the mathematical disaster</a>
+3. <a href = "./SimpleJSGame/index.html">Final Project (Still WIP)</a>
 

@@ -31,16 +31,16 @@ let charSize = 25;
 let playerX = gameWidth/2;
 let playerY = gameHeight/2;
 let playerDX = 0;       // m/s
-let playerDY = 0;      // m/s
+let playerDY = 0;       // m/s
 let tStep = 1/60;       // s
 
 // arbitrary variables to fiddle with to try and improve control 'feel'
-let inputForce = 0;   // N
+let inputForce = 0;     // N
 let inputAngle = 0; 
-let grappleForce = 0;  // N
+let grappleForce = 0;   // N
 let grappleAngle = 0;
 let playerMass = 10;    // kg
-let gravAccel = 0;     // m/s^2
+let gravAccel = 0;      // m/s^2
 
 // calculate player boundries
 let playerLeft = playerX-charSize/2;
@@ -53,6 +53,7 @@ let mouseXPos = 0;
 let mouseYPos = 0;
 let grapplePointX = 0;
 let grapplePointY = 0;
+let grappleFlag = false;
 
 // jank state machine
 let aPress = false;
@@ -76,6 +77,13 @@ function drawPlayer() {
     context.lineTo(playerX, playerY-charSize/2);
     context.closePath();
     context.fill();
+
+    // draw grapple
+	if (grappleFlag) {
+		context.moveTo(playerX, playerY);
+		context.lineTo(grapplePointX, grapplePointY);
+		context.stroke();
+	}
 }
 
 //-------------------------
@@ -141,6 +149,7 @@ canvas.addEventListener('mousemove', function(event) {
 
 canvas.addEventListener("click", function(e) {
     let gameRect = canvas.getBoundingClientRect();
+    grappleFlag = true;
     grapplePointX = e.clientX -gameRect.left;
     grapplePointY = e.clientY - gameRect.top;
     grappleForce = 200;
@@ -171,29 +180,42 @@ function keyUpHandler(e) {
 // Mathy things
 //-------------------------
 function updateXVelocity (grappleAngle, inputAngle) {
-    console.log("x" + ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX)
+    //console.log("x" + ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX)
     return ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX;
 }
 
 function updateYVelocity (grappleAngle, inputAngle) {
-    console.log("y" + ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX)
+    //console.log("y" + ((grappleForce*Math.cos(grappleAngle) + inputForce)/playerMass)*tStep + playerDX)
     return ((-grappleForce*Math.sin(grappleAngle) + playerMass*gravAccel)/playerMass)*tStep + playerDY;
 }
 
+// outputs radians
 function calculateGrappleAngle() {  
-    let delX = grapplePointX - playerX;
-    let delY = grapplePointY - playerY;
+    let delX = mouseXPos - playerX;
+    let delY = mouseYPos - playerY;
 
-    console.log(Math.atan(delY/delX)*180/Math.PI);
+    console.log("delX; " + delX);
+    console.log("delY " + delY);
 
-    return Math.atan(delX/delY);
+    context.moveTo(playerX, playerY);
+    context.lineTo(mouseXPos, mouseYPos);
+    context.stroke();
+
+    let angle = Math.acos(delX / Math.sqrt(Math.pow(delX, 2) + Math.pow(delY, 2))) * (180/Math.PI);
+
+    console.log("if this doesn't say 3.927, cry " + angle);
+
+    return 0; // Math.cos(delX/Math.sqrt(Math.pow(delY)+Math.pow(delX)));
 }
 
 function calculationManager() {
     grappleAngle = calculateGrappleAngle();
 
-    playerDX = updateXVelocity(grappleAngle, inputAngle);
-    playerDY = updateYVelocity(grappleAngle, inputAngle);
+    let gravForce = playerMass * gravAccel;
+    let delV = (tStep/playerMass) * Math.pow((Math.pow(grappleForce, 2) + gravForce * (gravForce - grappleForce * Math.sin(grappleAngle))), .5);
+
+    playerDX = delV * Math.sin(grappleAngle);
+    playerDY = delV * Math.cos(grappleAngle);
 
     checkCollision();
 
@@ -216,9 +238,18 @@ function calculationManager() {
          
 }
 
+async function getFunFact() {
+    var factElement = document.getElementById("funFact");
+    const response = await fetch('https://asli-fun-fact-api.herokuapp.com/');
+    var responseJSON = await response.json();
+    factElement.innerText = responseJSON.data.fact;
+}
+
 //-------------------------
 // Run
 //-------------------------
+getFunFact();
+
 setInterval(calculationManager, 20)
 
 setInterval(draw, 20);
@@ -228,8 +259,10 @@ setInterval(updateDeveloperDisplay, 20);
 function updateDeveloperDisplay() {
     document.getElementById("x-coordinate").innerHTML = playerX;
     document.getElementById("y-coordinate").innerHTML = playerY;
-    
+
 }
+
+
 
 
 

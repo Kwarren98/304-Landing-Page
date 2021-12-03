@@ -150,7 +150,7 @@ canvas.addEventListener('mousemove', function(event) {
 canvas.addEventListener("click", function(e) {
     let gameRect = canvas.getBoundingClientRect();
     grappleFlag = true;
-    grapplePointX = e.clientX -gameRect.left;
+    grapplePointX = e.clientX - gameRect.left;
     grapplePointY = e.clientY - gameRect.top;
     grappleForce = 200;
 });
@@ -191,21 +191,14 @@ function updateYVelocity (grappleAngle, inputAngle) {
 
 // outputs radians
 function calculateGrappleAngle() {  
-    let delX = mouseXPos - playerX;
-    let delY = mouseYPos - playerY;
+    let delX = grapplePointX - playerX;
+    let delY = grapplePointY - playerY;
 
-    console.log("delX; " + delX);
-    console.log("delY " + delY);
+    let angle = Math.atan2(-delY, -delX) + Math.PI; // atan2 spits out an angle that's literally backwards from how Canvas defines its coordinate system but that's fiiiiiiiiiiiiiiiiine......
 
-    context.moveTo(playerX, playerY);
-    context.lineTo(mouseXPos, mouseYPos);
-    context.stroke();
+    if (grappleFlag == true) { console.log("angle: " + angle * (180/Math.PI)); }
 
-    let angle = Math.acos(delX / Math.sqrt(Math.pow(delX, 2) + Math.pow(delY, 2))) * (180/Math.PI);
-
-    console.log("if this doesn't say 3.927, cry " + angle);
-
-    return 0; // Math.cos(delX/Math.sqrt(Math.pow(delY)+Math.pow(delX)));
+    return angle; 
 }
 
 function calculationManager() {
@@ -231,10 +224,10 @@ function calculationManager() {
     // playerDY = updateYVelocity(grappleAngle, );
 
     // update collision box
-    playerLeft = playerX-charSize/2;
-    playerRight = playerX+charSize/2;
-    playerTop = playerY-charSize/2;
-    playerBot = playerY+charSize/2;
+    playerLeft = playerX - charSize/2;
+    playerRight = playerX + charSize/2;
+    playerTop = playerY - charSize/2;
+    playerBot = playerY + charSize/2;
          
 }
 
@@ -259,7 +252,8 @@ setInterval(updateDeveloperDisplay, 20);
 function updateDeveloperDisplay() {
     document.getElementById("x-coordinate").innerHTML = playerX;
     document.getElementById("y-coordinate").innerHTML = playerY;
-
+    document.getElementById("grapple-x-coordinate").innerHTML = grapplePointX;
+    document.getElementById("grapple-y-coordinate").innerHTML = grapplePointY;
 }
 
 

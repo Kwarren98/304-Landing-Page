@@ -39,8 +39,8 @@ let tStep = 1/60;       // s
 // let inputAngle = 0; 
 let grappleForce = 0;       // N
 let grappleAngle = 0;
-let playerMass = 10;        // kg
-let gravAccel = 9000;       // m/s^2
+let playerMass = 5000;        // kg
+let gravAccel = 98.1;       // m/s^2
 
 // calculate player boundries
 let playerLeft = playerX-charSize/2;
@@ -152,7 +152,7 @@ canvas.addEventListener("click", function(e) {
     grappleFlag = true;
     grapplePointX = e.clientX - gameRect.left;
     grapplePointY = e.clientY - gameRect.top;
-    grappleForce = 2000;
+    grappleForce = 200;
 });
 
 document.addEventListener("keydown", keyDownHandler, false);
@@ -190,9 +190,14 @@ function keyUpHandler(e) {
 // }
 
 // outputs radians
-function calculateGrappleAngle() {  
-    let delX = grapplePointX - playerX;
-    let delY = grapplePointY - playerY;
+function calculateGrappleAngle() {
+    let delX = 0;
+    let delY = 0;
+
+    if (grappleFlag) {
+        delX = grapplePointX - playerX;
+        delY = grapplePointY - playerY;
+    }
 
     let angle = Math.atan2(-delY, -delX) + Math.PI; // atan2 spits out an angle that's literally backwards from how Canvas defines its coordinate system but that's fiiiiiiiiiiiiiiiiine......
 
@@ -205,10 +210,10 @@ function calculationManager() {
     grappleAngle = calculateGrappleAngle();
 
     let gravForce = playerMass * gravAccel;
-    let delV = (tStep/playerMass) * Math.pow((Math.pow(grappleForce, 2) + gravForce * (gravForce - grappleForce * Math.sin(grappleAngle))), .5);
+    // let delV = (tStep/playerMass) * Math.pow((Math.pow(grappleForce, 2) + gravForce * (gravForce - grappleForce * Math.sin(grappleAngle))), .5);
 
-    playerDX = delV * Math.cos(grappleAngle);
-    playerDY = delV * Math.sin(grappleAngle);
+    playerDX = (tStep / playerMass) * grappleForce * Math.cos(grappleAngle);   //delV * Math.cos(grappleAngle);
+    playerDY = (tStep / playerMass) * gravForce - grappleForce * Math.sin(grappleAngle);   //delV * Math.sin(grappleAngle);
 
     checkCollision();
 
